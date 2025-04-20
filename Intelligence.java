@@ -1,12 +1,12 @@
 public class Intelligence {
     
-    private boolean inSchool = false;
-    private String degree = none;
-    private int value = 0;
+    private boolean inSchool;
+    private String degree;
+    private int value;
 
-    public Integlligence(boolean inSchool, String degree, int value){
-        this.inSchool = inSchool;
-        this.degree = degree;
+    public Integlligence(int value){
+        this.inSchool = false;
+        this.degree = null;
         this.value = value;
     }
 
@@ -21,7 +21,7 @@ public class Intelligence {
     }
 
     public void getDegree(){
-        if (this.degree == none){
+        if (this.degree == null){
             this.degree = "kindergarten";
         } elif (this.degree == "kindergarten"){
             this.degree = "elementary school";
