@@ -41,7 +41,7 @@ public class Health {
         return charge;
 
     }
-    public boolean findDocter(){
+    public boolean findDoctor(){
         if(this.isSick){
             Scanner input=new Scanner(System.in);
             GetYN yn=new GetYN();
@@ -57,25 +57,12 @@ public class Health {
             input.close();
             }
             if (answer==true){
-                goToDoctor();
                 return true;
             } else{
                 return false;
             }
         }
         return false;
-    }
-    private boolean goToDoctor(){
-        int charge=this.getMedicalCharge();
-        Money myMoney=new Money(0);
-        Player myPlayer=new Player(myMoney);
-        myPlayer.money.amount-=charge;
-        return true;
-
-
-            
-
-
     }
 
 
