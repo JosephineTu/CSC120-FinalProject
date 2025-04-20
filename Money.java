@@ -10,9 +10,11 @@ public class Money {
         Hashtable<String, Integer> house = new Hashtable<>();
     }
 
-    public void buyLottery(int amount){
-        // random number generator?
-        amount -= 300;
+    public void buyLottery(int lotteryPrice){
+        this.amount -= lotteryPrice;
+        // random number generator decide if win
+        // random number generator decide win how much
+        this.amount += winPrize;
     }
 
     public void buyHouse(){
