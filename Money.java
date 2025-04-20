@@ -4,11 +4,10 @@ import java.util.Scanner;
 public class Money {
     
     private int amount;
-    private Hashtable<String, Integer> house;
 
-    public Money(int amount, Hashtable<String, Integer> house){
+    public Money(int amount){
         this.amount = amount;
-        this.house = new Hashtable<String, Integer>();
+        Hashtable<String, Integer> house = new Hashtable<>();
     }
 
     public void buyLottery(int amount){
