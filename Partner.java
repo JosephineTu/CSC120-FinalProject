@@ -17,15 +17,15 @@ public class Partner extends Person {
         
     }
 
-    public boolean endRelationships(){
+    public boolean endRelationship(Partner n){
         this.isInrelationship = false;
-        System.out.println(" You don't have partner now");
+        System.out.println("You are no longer partner with "+n+" .");
         return this.isInrelationship;
     }
 
     public static void main(String[] args) {
         Partner Alice = new Partner(30, "Alive", 20, true);
-        Player Alex = new Player(30, "Alex", 10,true);
+        Player Alex = new Player(30, "Alex", 10,true,new Health(100),new Intelligence(100),new Money(0));
         Alice.getmarried(Alex);
     }
 

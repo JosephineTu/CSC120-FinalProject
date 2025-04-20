@@ -8,7 +8,7 @@ public class FamilyMember extends Person {
     
     }
 
-    public Money AskforMoney(int amt){
+    public int AskforMoney(int amt){
         
         return this.money;
     }

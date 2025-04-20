@@ -1,6 +1,6 @@
 import java.util.ArrayList;
 import java.util.Scanner;
-
+import java.util.Hashtable;
 public class Money {
     
     private int amount;

@@ -1,23 +1,57 @@
 public class Intelligence {
     
     private boolean inSchool;
-    private String degree;
+    private DEGREE degree;
     private int value;
 
-    public Integlligence(int value){
+    public Intelligence(int value){
         this.inSchool = false;
         this.degree = null;
         this.value = value;
     }
 
     public void readBook(){
-        // random number generator?
-        this.value += 30;
+        // adds 3 to the current value, capped at 100
+        if(this.value<97){
+            this.value+=3;
+        } else{
+            this.value=100;
+        }
     }
 
     public void takeExam(){
-        // random number generator?
-        this.value += 30;
+        // use if statement comparison to determine whether the player should still remain in school, if passes exam, modify the highest degree.
+        if(this.degree==DEGREE.Elementary){
+            if(this.value<75){
+                dropOut();
+            } else{
+                this.degree=DEGREE.Secondary;
+            }
+        }
+        else if(this.degree==DEGREE.Secondary){
+            if(this.value<80){
+                dropOut();
+            } else{
+                this.degree=DEGREE.HighSchool;
+            }
+        }
+        else if(this.degree==DEGREE.HighSchool){
+            if(this.value<85){
+                dropOut();
+            } else{
+                this.degree=DEGREE.Bachelor;
+            }
+        }
+        else if(this.degree==DEGREE.Bachelor){
+            if(this.value<90){
+                dropOut();
+            } else{
+                this.degree=DEGREE.Master;
+            }
+        }
+    }
+    public void dropOut(){
+        this.inSchool=false;
     }
 
     public void getDegree(){
