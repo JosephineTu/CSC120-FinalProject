@@ -3,7 +3,7 @@ import java.util.Scanner;
 import java.util.Random;
 public class Money {
     
-    private int amount;
+    public int amount;
     private ArrayList<House> house;
 
     public Money(int amount){
@@ -27,13 +27,16 @@ public class Money {
     }
 
     public void buyHouse(){
+        House newHouse=new House("Downtown Studio",2000000,1);
         Scanner s = new Scanner(System.in);
-        System.out.println("Which house do you want to buy?");
-        String name = s.nextLine();
-        this.house.add(name);
-        // random number generator?
-        this.amount-=300;
+        System.out.println("There is an available new house:"+newHouse.toString()+", buy it? (y/n)");
+        String ans = s.nextLine();
+        GetYN yesorNo=new GetYN();
+        boolean yn=yesorNo.yesOrNo(ans);
         s.close();
+        if(yn==true){
+            this.amount-=newHouse.getPrice(0);
+        }
     }
 
     public void sellHouse(){
