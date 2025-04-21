@@ -4,6 +4,7 @@ import java.util.Hashtable;
 public class Money {
     
     private int amount;
+    private Hashtable<String,Integer> house;
 
     public Money(int amount){
         this.amount = amount;

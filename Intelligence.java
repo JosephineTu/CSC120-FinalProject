@@ -9,7 +9,11 @@ public class Intelligence {
         this.degree = null;
         this.value = value;
     }
-
+    public void goToSchool(){
+        this.degree=DEGREE.Elementary;
+        this.inSchool=true;
+        System.out.println("You are now enrolled in primary school.");
+    }
     public void readBook(){
         // adds 3 to the current value, capped at 100
         if(this.value<97){
@@ -49,33 +53,17 @@ public class Intelligence {
                 this.degree=DEGREE.Master;
             }
         }
+        else if(this.degree==DEGREE.Master){
+            if(this.value!=100){
+                dropOut();
+            } else{
+                this.degree=DEGREE.PhD;
+            }
+        }
     }
     public void dropOut(){
         this.inSchool=false;
-    }
-
-    public void getDegree(){
-        if (this.degree == null){
-            this.degree = "kindergarten";
-        } elif (this.degree == "kindergarten"){
-            this.degree = "elementary school";
-        } elif (this.degree == "elementary school"){
-            this.degree = "middle school";
-        } elif (this.degree == "middle school"){
-            this.degree = "high school";
-        } elif (this.degree == "high school"){
-            this.degree = "bachelor degree";
-        } elif (this.degree == "bachelor degree"){
-            Scanner s = new Scanner(System.in);
-            System.out.println("If you are pursing master degree, type '1', if phD, type '2': ");
-            int purse = s.nextInt();
-            if (pursue == 1){
-                this.degree = "master degree";
-            } elif (pursue == 2){
-                this.degree = "phD";
-            }
-        } elif (this.degree == "master degree"){
-            this.degree = "phD";
-        }
+        System.out.println("You are no longer in school. Your highest degree earned is "+this.degree+".");
     }
 }
+    
