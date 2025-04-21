@@ -1,5 +1,7 @@
 public class Friend extends Person{
 
+   public class Friend extends Person{
+
     //attributes
    private boolean isFriend;
 
@@ -19,7 +21,10 @@ public class Friend extends Person{
     return this.isFriend == false;
    }
 
+   public void buyGift(Player p){
+    p.money.house.add(new House("Gift",200,1));
+   }
 
-
+   }
 
 }
