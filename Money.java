@@ -1,21 +1,29 @@
 import java.util.ArrayList;
 import java.util.Scanner;
-import java.util.Hashtable;
+import java.util.Random;
 public class Money {
     
     private int amount;
-    private Hashtable<String,Integer> house;
+    private ArrayList<House> house;
 
     public Money(int amount){
         this.amount = amount;
-        Hashtable<String, Integer> house = new Hashtable<>();
+        ArrayList<House> house=new ArrayList<>();
     }
 
-    public void buyLottery(int lotteryPrice){
-        this.amount -= lotteryPrice;
+    public void buyLottery(){
+        this.amount -=10;
         // random number generator decide if win
-        // random number generator decide win how much
-        this.amount += winPrize;
+        Random rand=new Random();
+        int randInt=rand.nextInt(0,10);
+        if(randInt==10){
+            // random number generator decide win how much
+            int prize=rand.nextInt(10,10000);
+            this.amount+=prize;
+        } else{
+            System.out.println("You did not win a prize, try again next time!");
+        }
+
     }
 
     public void buyHouse(){
