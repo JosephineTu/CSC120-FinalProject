@@ -1,9 +1,9 @@
 public class House {
     String name;
-    private double price;
+    public double price;
     int timeBought=0;
     int growthType;
-    public House(String name,int price,int growthType){
+    public House(String name,double price,int growthType){
         this.name=name;
         this.price=price;
         this.growthType=growthType;

@@ -3,10 +3,10 @@ import java.util.Scanner;
 import java.util.Random;
 public class Money {
     
-    public int amount;
-    private ArrayList<House> house;
+    public double amount;
+    public ArrayList<House> house;
 
-    public Money(int amount){
+    public Money(double amount){
         this.amount = amount;
         ArrayList<House> house=new ArrayList<>();
     }
@@ -39,13 +39,11 @@ public class Money {
         }
     }
 
-    public void sellHouse(){
-        Scanner s = new Scanner(System.in);
-        System.out.println("Which house do you want to sell?");
-        String name = s.nextLine();
-        this.house.remove(name);
-        this.amount += 300;
-        s.close();
+    public void sellHouse(House h){
+        if(this.house.contains(h)){
+            this.house.remove(h);
+            this.amount+=h.getPrice(0);
+        }
     }
 
 }
