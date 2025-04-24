@@ -23,11 +23,11 @@ public class Partner extends Person {
         return this.isInrelationship;
     }
 
-    public static void main(String[] args) {
-        Partner Alice = new Partner(30, "Alive", 20, true);
-        Player Alex = new Player(30, "Alex", 10,true,new Health(100),new Intelligence(100),new Money(0));
-        Alice.getmarried(Alex);
-    }
+    //public static void main(String[] args) {
+        //Partner Alice = new Partner(30, "Alive", 20, true);
+    //     Player Alex = new Player(30, "Alex", 10,true,new Health(100),new Intelligence(100),new Money(0));
+    //     Alice.getmarried(Alex);
+    // }
 
     private String getname() {
         throw new UnsupportedOperationException("Not supported yet.");

@@ -39,10 +39,10 @@ public class Money {
         }
     }
 
-    public void sellHouse(House h){
+    public void sellHouse(House h, int currentTime){
         if(this.house.contains(h)){
             this.house.remove(h);
-            this.amount+=h.getPrice(0);
+            this.amount+=h.getPrice(currentTime-h.timeBought);
         }
     }
 

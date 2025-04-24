@@ -1,10 +1,10 @@
 public class Person {
 
     //Attributes
-    private int age;
-    private String name;
-    private int relationshipValue;
-    private boolean isAlive;
+    protected int age;
+    protected String name;
+    protected int relationshipValue;
+    protected boolean isAlive;
 
     //Constructor
     public Person(int age, String name, int relationshipValue, boolean  isAlive){
