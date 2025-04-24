@@ -11,5 +11,12 @@ public class Player extends Person{
         this.money = money;
         this.people=people;
     }
+    public void readBook(){
+        if(this.intelligence.value<98){
+            this.intelligence.value+=3;
+        } else{
+            this.intelligence.value=100;
+        }
+    }
 
 }

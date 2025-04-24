@@ -2,7 +2,7 @@ public class Intelligence {
     
     private boolean inSchool;
     private DEGREE degree;
-    private int value;
+    public int value;
 
     public Intelligence(int value){
         this.inSchool = false;
