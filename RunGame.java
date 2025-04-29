@@ -51,7 +51,15 @@ public class RunGame{
         int counter=0;
         boolean termLoop=false;
         while(counter<5 && termLoop==false){
-            searchInput(input);
+            String ans=searchInput(input);
+            switch(ans){
+                case "EXERCISE":
+                p.health.doExercise();
+                case "READ":
+                p.intelligence.readBook();
+                case "SELL":
+                
+            }
         }
         time.timeGo();
     }
