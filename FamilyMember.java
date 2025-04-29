@@ -3,8 +3,8 @@ public class FamilyMember extends Person {
     // decides if this person can give money to the player
     private boolean canGiveMoney;
 
-    public FamilyMember(int age, String name, int relationshipValue, boolean isAlive, boolean canGiveMoney){
-        super(age, name, relationshipValue, isAlive);
+    public FamilyMember(int age, String name, String relationshipType, int relationshipValue, boolean isAlive, boolean canGiveMoney){
+        super(age, relationshipType, name, relationshipValue, isAlive);
         this.canGiveMoney=canGiveMoney;
     }
 

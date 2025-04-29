@@ -5,8 +5,8 @@ public class Friend extends Person{
    private boolean isFriend;
 
    //constructor
-   public Friend(int age, String name, int relationshipValue, boolean isAlive){
-   super(age, name, relationshipValue, isAlive);
+   public Friend(int age, String name, int relationshipValue, String relationshipType, boolean isAlive){
+   super(age, relationshipType, name, relationshipValue, isAlive);
    this.isFriend = true;
    }
    /**
