@@ -1,5 +1,5 @@
 public class Time {
-    private int counter;
+    public int counter;
     public Time(){
         this.counter=0;
     }

@@ -61,17 +61,11 @@ public class Person {
         return this.isAlive;
     }
 
-    public static void main(String[] args) {
-        Person bob = new Person(0, "Bob", 10, true);
-        bob.printManifest();
-        bob.grow(10);
-        bob.getname(bob);
-        bob.getIsAlive();
-        bob.die();
 
-    }
+
+}
     
         
-    }
+    
 
 
