@@ -1,3 +1,7 @@
+/*
+ * GetYN get the user input "yes" or "no" and transform this to boolean for the game to run. 
+ * @version: April 29, 2025
+ */
 public class GetYN {
     public GetYN(){
     }

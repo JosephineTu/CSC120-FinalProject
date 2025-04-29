@@ -1,20 +1,40 @@
+// Import java packages
 import java.util.Random;
 import java.util.Scanner;
+/*
+ * Health class that stores health related methods for the player. 
+ * @version: April 29, 2025
+ */
 public class Health {
+    //Attributes
     private int healthIndex;
     public boolean isSick;
     private DISEASE diseaseType;
+    /*
+     * Constructor
+     * @param int healthIndex
+     */
     public Health(int healthIndex){
         this.healthIndex=healthIndex;
         this.isSick=false;
         this.diseaseType=null;
     }
+    /*
+     * accessor for the int healthIndex
+     */
     public int getHealthIndex(){
         return this.healthIndex;
     }
+    /*
+     * add 5 points to int healthIndex
+     */
     public void doExercise(){
         this.healthIndex+=5;
     }
+    /*
+     * generate a random disease from the DISEASE class, and change boolean isSick to true. 
+     * @return DISEASE myDisease
+     */
     public DISEASE fallSick(){
         DISEASE[] diseases=DISEASE.values();
         int index=new Random().nextInt(0,4);
@@ -24,6 +44,9 @@ public class Health {
         System.out.println("You got "+myDisease+"!");
         return myDisease;
     }
+    /*
+     * subtract int healthIndex points according to the type of disease the player get. 
+     */
     public void impactHealth(){
         switch(this.diseaseType){
             case DISEASE.Diarrhea:
@@ -45,6 +68,10 @@ public class Health {
             break;
         }
     }
+    /*
+     * get the amount of money need to charge for the type of disease the player get. 
+     * @return int charge
+     */
     public int getMedicalCharge(){
         int charge=0;
         if(this.diseaseType==DISEASE.Cancer){
@@ -65,6 +92,10 @@ public class Health {
         return charge;
 
     }
+    /*
+     * if boolean isSick is true, ask player if wants to find doctors and charge money accordingly. 
+     * @return boolean true or false
+     */
     public boolean findDoctor(Scanner input){
         if(this.isSick){
             GetYN yn=new GetYN();
@@ -86,6 +117,11 @@ public class Health {
         }
         return false;
     }
+    /*
+     * indicate whether or not the diease is cured if input "true".
+     * there's a chance for some disease to not be cured.
+     * @param boolean yes
+     */
     public void cureDisease(boolean yes){
         if(yes){
             switch(this.diseaseType){
