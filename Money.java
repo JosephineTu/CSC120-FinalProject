@@ -8,14 +8,14 @@ public class Money {
 
     public Money(double amount){
         this.amount = amount;
-        ArrayList<House> house=new ArrayList<>();
+        this.house=new ArrayList<>();
     }
 
     public void buyLottery(){
         this.amount -=10;
         // random number generator decide if win
         Random rand=new Random();
-        int randInt=rand.nextInt(0,10);
+        int randInt=rand.nextInt(0,11);
         if(randInt==10){
             // random number generator decide win how much
             int prize=rand.nextInt(10,10000);
@@ -38,12 +38,30 @@ public class Money {
             this.amount-=newHouse.getPrice(0);
         }
     }
-
-    public void sellHouse(House h, int currentTime){
-        if(this.house.contains(h)){
-            this.house.remove(h);
-            this.amount+=h.getPrice(currentTime-h.timeBought);
+    public void printManifest(){
+        for(int i=1;i<this.house.size()+1;i++){
+            System.out.println(i+": "+house.get(i-1));
         }
+    }
+    public double removeHouse(House h,int currentTime){
+        double price=h.getPrice(currentTime);
+        if(!this.house.remove(h)){
+            throw new RuntimeException("Error: You do not own this house.");
+        }
+        return price;
+    }
+    public void sellHouse(Scanner input, int currentTime){
+        double price=0;
+        System.out.println("Which house do you want to sell? Please enter the corresponding number.");
+        this.printManifest();
+        int ans=input.nextInt();
+        try{
+            price=this.removeHouse(this.house.get(ans-1),currentTime);
+        } catch (RuntimeException e){
+            System.out.println(e.getMessage());
+        }
+        this.amount+=price;
+        
     }
 
 }
