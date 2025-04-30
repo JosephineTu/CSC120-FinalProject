@@ -1,5 +1,5 @@
 import java.util.ArrayList;// import the package we need 
-
+import java.util.Scanner;
 public class Player extends Person{
 // this is a child class of person, besides all the attributes from the parent class, it has other attributes that we need to use in the game.
 
@@ -26,6 +26,7 @@ public class Player extends Person{
         this.relationshipType="me";
         this.intelligence = intelligence;
         this.money = money;
+        this.relationshipValue=100;
         this.people=people;
     }
 
@@ -39,14 +40,22 @@ public class Player extends Person{
             this.intelligence.value=100;
         }
     }
-    public void printPeople(){
+    public void printPeople(int time){
         for(int i=1;i<this.people.size()+1;i++){
-            this.people.get(i-1).printManifest();
+            this.people.get(i-1).printManifest(time);
         }
     }
-    public void endRelationship(Scanner input){
+    public void endRelationship(Scanner input, int time){
         System.out.println("Here are the relationships you currently have: ");
-        this.printPeople();
+        this.printPeople(time);
         System.out.println("Please enter the number corresponding to the relationship you want to end.");
+    }
+    public void printManifest(){
+        System.out.println(this.name+" is "+this.getage()+" years old");
+        System.out.println("------Player Statistics------");
+        System.out.println("HEALTH: "+this.health.getHealthIndex());
+        System.out.println("MONEY: "+this.money.amount);
+        System.out.println("INTELLIGENCE: "+this.intelligence.value);
+        System.out.println("------------------------------");
     }
 }

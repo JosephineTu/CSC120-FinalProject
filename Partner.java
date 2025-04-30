@@ -10,11 +10,19 @@ public class Partner extends Person {
         this.isMarried = false;
     }
 
-    public boolean getmarried(Player player){
+    public boolean getMarried(Player player){
         this.isMarried = true;
         System.out.println(Player.getname(player)+" and "+ getname(this)+ " get married!");
         return this.isMarried;
         
+    }
+    public boolean divorce(Player p){
+        if(this.isMarried==true){
+            this.isMarried=false;
+            p.money.amount=p.money.amount/2;
+            System.out.println(this.name+" left you and took away half of your money.");
+        }
+        return true;
     }
 
     // public boolean endRelationship(Partner n){
@@ -29,10 +37,6 @@ public class Partner extends Person {
     //     Alice.getmarried(Alex);
     // }
 
-    private String getname() {
-        throw new UnsupportedOperationException("Not supported yet.");
-
-    }
 
 
 

@@ -38,11 +38,9 @@ public class Person {
         }
     }
 
-    public void printManifest(){
+    public void printManifest(int time){
         if(this.getIsAlive()){
-            System.out.println(this.name+" is "+this.getage()+" years old, has "+this.relationshipValue+" relationships, alive.");
-        }else{
-            System.out.println(this.name+" i s"+this.getage()+" years old, has "+this.relationshipValue+" relationships,dead.");
+            System.out.println(this.name+" is "+(this.getage()+time)+" years old, has a "+this.relationshipValue+" with you");
         }
     }
 
