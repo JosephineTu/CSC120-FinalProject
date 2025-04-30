@@ -54,7 +54,7 @@ public class RunGame{
         p.printManifest();
     
         while (counter < 3 && !termLoop) {
-            System.out.println("What do you want to do? (exercise, read, sell, ask, next)");
+            System.out.println("What do you want to do?");
             String ans = searchInput(input).toUpperCase();
     
             switch (ans) {
