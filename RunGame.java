@@ -18,7 +18,7 @@ public class RunGame{
     new HashMap<>(Map.of("exercise","EXERCISE","read","READ",
     "sell","SELL","next","NEXT","ask","ASK","drop","DROP","other","OTHER"));
     public ArrayList<Job> jobs=new ArrayList<>();
-
+    public ArrayList<Partner> availablePartners=new ArrayList<>();
     /*
      * Constructor
      * @param Player player
@@ -37,6 +37,16 @@ public class RunGame{
         jobs.add(new Job("Physician", DEGREE.PhD, 150000));
         jobs.add(new Job("NIH Scientist", DEGREE.PhD, 120000));
         jobs.add(new Job("AI Researcher", DEGREE.PhD, 130000));
+        Partner abigail = new Partner(-1, "girlfriend", "Abigail", 80, true);
+        Partner sebastian = new Partner(1, "boyfriend", "Sebastian", 50, true);
+        Partner sam = new Partner(1, "boyfriend", "Sam", 60, true);
+        Partner elliot = new Partner(2, "boyfriend", "Elliot", 70, true);
+        Partner emily = new Partner(1, "girlfriend", "Emily", 90, true);
+        availablePartners.add(abigail);
+        availablePartners.add(sebastian);
+        availablePartners.add(sam);
+        availablePartners.add(elliot);
+        availablePartners.add(emily);
     }
     /*
      * take in the commands user input to the class
@@ -68,7 +78,8 @@ public class RunGame{
         event1(time.getTime(), p);
         event2(time.getTime(), p);
         event3(input,p,time.getTime());
-        event4(p,input);
+        event4(p,input,time.getTime());
+        event5(p,input,time.getTime());
         p.money.amount+=p.money.annualIncome;
         int counter = 0;
         boolean termLoop = false;
@@ -121,7 +132,6 @@ public class RunGame{
                         System.out.println("Invalid selection.");
                         break;
                     }
-    
                     System.out.println("How much do you want?");
                     int amt = input.nextInt();
                     input.nextLine(); // consume newline
@@ -189,12 +199,30 @@ public class RunGame{
         System.out.println("You are now employed as a "+p.money.currentJob.name+"!");
         p.money.isEmployed=true;
     }
-    public void event4(Player p,Scanner input){
+    public void event4(Player p,Scanner input,int time){
         Random rand=new Random();
         int odd=rand.nextInt(7);
-        if(odd==6){
+        if(odd==6 && time>3){
             p.health.fallSick();
             p.health.findDoctor(input,p);
+        }
+    }
+    public void event5(Player p, Scanner input, int time){
+        Random odd=new Random();
+        int puppylove=odd.nextInt(3);
+        if(time>15 && time<25 && puppylove==2){
+            Random rand=new Random();
+            int random=rand.nextInt(this.availablePartners.size());
+            Partner selectedPartner=availablePartners.get(random);
+            System.out.println("You met "+selectedPartner.name+", their age is"+(selectedPartner.age+time)+", do you want to date them? (y/n)");
+            String ans=input.nextLine();
+            GetYN answer=new GetYN();
+            boolean yn=answer.yesOrNo(ans);
+            if(yn==true){
+                selectedPartner.isInrelationship=true;
+                availablePartners.remove(selectedPartner);
+                System.out.println("Now you are dating "+selectedPartner.name+"!");
+            }
         }
     }
     public static void main (String[] args){
@@ -205,5 +233,6 @@ public class RunGame{
         FamilyMember arkintu=new FamilyMember(31, "ArkinTu", "father", 100, true, true);
         me.people.add(arkintu);
         game.mainLoop(input);
+        input.close();
     }
 }
