@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 public class Partner extends Person {
 
     private boolean isInrelationship;
@@ -15,6 +16,11 @@ public class Partner extends Person {
         System.out.println(Player.getname(player)+" and "+ getname(this)+ " get married!");
         return this.isMarried;
         
+    }
+    public void breakUp(){
+        if(this.isInrelationship==true){
+            this.isInrelationship=false;
+        }
     }
     public boolean divorce(Player p){
         if(this.isMarried==true){

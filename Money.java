@@ -5,12 +5,17 @@ public class Money {
     
     public double amount;
     public ArrayList<House> house;
+    public boolean isEmployed;
+    public Job currentJob;
+    public double annualIncome;
 
     public Money(double amount){
         this.amount = amount;
         this.house=new ArrayList<>();
+        this.isEmployed=false;
+        this.currentJob=null;
+        this.annualIncome=0;
     }
-
     public void buyLottery(){
         this.amount -=10;
         // random number generator decide if win

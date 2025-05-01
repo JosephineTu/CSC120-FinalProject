@@ -18,6 +18,9 @@ public class Intelligence {
         this.degree = null;
         this.value = value;
     }
+    public boolean getinSchool(){
+        return this.inSchool;
+    }
     /*
      * put the player into school by changing degree to Elementary, and boolean inSchool to true. 
      */
@@ -47,6 +50,7 @@ public class Intelligence {
                 dropOut();
             } else{
                 this.degree=DEGREE.Secondary;
+                System.out.println("You now entered secondary school.");
             }
         }
         else if(this.degree==DEGREE.Secondary){
@@ -54,6 +58,7 @@ public class Intelligence {
                 dropOut();
             } else{
                 this.degree=DEGREE.HighSchool;
+                System.out.println("You now entered high school.");
             }
         }
         else if(this.degree==DEGREE.HighSchool){
@@ -61,6 +66,7 @@ public class Intelligence {
                 dropOut();
             } else{
                 this.degree=DEGREE.Bachelor;
+                System.out.println("You now entered college!");
             }
         }
         else if(this.degree==DEGREE.Bachelor){
@@ -68,6 +74,7 @@ public class Intelligence {
                 dropOut();
             } else{
                 this.degree=DEGREE.Master;
+                System.out.println("You are now enrolled in a Master program.");
             }
         }
         else if(this.degree==DEGREE.Master){
@@ -75,6 +82,7 @@ public class Intelligence {
                 dropOut();
             } else{
                 this.degree=DEGREE.PhD;
+                System.out.println("Congrats on your acceptance to the Doctorate program!");
             }
         }
     }
@@ -84,6 +92,9 @@ public class Intelligence {
     public void dropOut(){
         this.inSchool=false;
         System.out.println("You are no longer in school. Your highest degree earned is "+this.degree+".");
+    }
+    public DEGREE getDegree(){
+        return this.degree;
     }
 }
     

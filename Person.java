@@ -18,7 +18,6 @@ public class Person {
 
 
     public int getage(){
-        System.out.println("You are "+this.age+" years old");
         return this.age;
     }
 
@@ -29,18 +28,12 @@ public class Person {
 
 
     public boolean getIsAlive() {
-        if (this.isAlive == true) {
-            System.out.println("You are alive");
-            return this.isAlive;
-        } else {
-            System.out.println("You passed away");
-            return this.isAlive;
-        }
+        return this.isAlive;
     }
 
     public void printManifest(int time){
         if(this.getIsAlive()){
-            System.out.println(this.name+" is "+(this.getage()+time)+" years old, has a "+this.relationshipValue+" with you");
+            System.out.println("Your "+this.relationshipType+this.name+" is "+(this.getage()+time)+" years old, has a "+this.relationshipValue+" relationship with you");
         }
     }
 

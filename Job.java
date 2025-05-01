@@ -2,8 +2,8 @@ public class Job {
     
     //attributes
     public String name;
-    private DEGREE leastDegreeRequired;
-    private int annualIncome;
+    public DEGREE leastDegreeRequired;
+    public int annualIncome;
 
     /**
      * Constructor

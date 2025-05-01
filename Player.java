@@ -8,7 +8,7 @@ public class Player extends Person{
     public Intelligence intelligence; // the interlligence of the player
     public Money money; // the amount of money the player has
     public ArrayList<Person> people; // the list of friend and family member of the player
-
+    public ArrayList<Partner> partners;
     /**
      * constructor
      * @param age
@@ -28,6 +28,7 @@ public class Player extends Person{
         this.money = money;
         this.relationshipValue=100;
         this.people=people;
+        this.partners=new ArrayList<>();
     }
 
     /**
@@ -50,8 +51,8 @@ public class Player extends Person{
         this.printPeople(time);
         System.out.println("Please enter the number corresponding to the relationship you want to end.");
     }
-    public void printManifest(){
-        System.out.println(this.name+" is "+this.getage()+" years old");
+    public void printManifest(int time){
+        System.out.println(this.name+" is "+(this.getage()+time)+" years old");
         System.out.println("------Player Statistics------");
         System.out.println("HEALTH: "+this.health.getHealthIndex());
         System.out.println("MONEY: "+this.money.amount);

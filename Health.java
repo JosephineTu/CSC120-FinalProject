@@ -9,7 +9,7 @@ public class Health {
     //Attributes
     private int healthIndex;
     public boolean isSick;
-    private DISEASE diseaseType;
+    public DISEASE diseaseType;
     /*
      * Constructor
      * @param int healthIndex
@@ -72,8 +72,8 @@ public class Health {
      * get the amount of money need to charge for the type of disease the player get. 
      * @return int charge
      */
-    public int getMedicalCharge(){
-        int charge=0;
+    public double getMedicalCharge(){
+        double charge=0;
         if(this.diseaseType==DISEASE.Cancer){
             charge=10000;
         }
@@ -96,10 +96,10 @@ public class Health {
      * if boolean isSick is true, ask player if wants to find doctors and charge money accordingly. 
      * @return boolean true or false
      */
-    public boolean findDoctor(Scanner input){
+    public boolean findDoctor(Scanner input,Player p){
         if(this.isSick){
             GetYN yn=new GetYN();
-            int charge=this.getMedicalCharge();
+            double charge=this.getMedicalCharge();
             System.out.println("There is a doctor who can cure your "+this.diseaseType+" The charge is "+charge+". Go to the doctor (y/n)?");
             String in=input.nextLine();
             boolean answer;
@@ -110,6 +110,8 @@ public class Health {
                 answer=true;
             }
             if (answer==true){
+                p.money.amount-=this.getMedicalCharge();
+                this.cureDisease(true);
                 return true;
             } else{
                 return false;
@@ -139,6 +141,7 @@ public class Health {
                     break;
                 } else{
                     this.healthIndex=0;
+                    System.out.println("Unfortunately, the flu took your life.");
                     break;
                 }
                 case DISEASE.Pneumonia:
@@ -146,6 +149,7 @@ public class Health {
                 int odd2=rand2.nextInt(0,8);
                 if(odd2!=7){
                     this.diseaseType=null;
+                    System.out.println("You recovered!");
                 } 
                 break;
                 case DISEASE.Cancer:
@@ -153,6 +157,7 @@ public class Health {
                 int odd3=rand3.nextInt(0,5);
                 if(odd3!=4){
                     this.diseaseType=null;
+                    System.out.println("You recovered!");
                 }
                 break;
                 default:
