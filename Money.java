@@ -55,17 +55,8 @@ public class Money {
         }
         return price;
     }
-    public void sellHouse(Scanner input, int currentTime){
-        double price=0;
-        System.out.println("Which house do you want to sell? Please enter the corresponding number.");
-        this.printManifest();
-        int ans=input.nextInt();
-        try{
-            price=this.removeHouse(this.house.get(ans-1),currentTime);
-        } catch (RuntimeException e){
-            System.out.println(e.getMessage());
-        }
-        this.amount+=price;
+    public void sellHouse(House m, int time){
+        this.amount+=m.getPrice(time);
         
     }
 

@@ -16,9 +16,11 @@ public class RunGame{
     public boolean gamecontinues;
     public final HashMap<String,String> commands=
     new HashMap<>(Map.of("exercise","EXERCISE","read","READ",
-    "sell","SELL","next","NEXT","ask","ASK","drop","DROP","other","OTHER"));
+    "sell","SELL","next","NEXT","ask","ASK","drop","DROP",
+    "lottery","LOTTERY","house","HOUSE","other","OTHER"));
     public ArrayList<Job> jobs=new ArrayList<>();
     public ArrayList<Partner> availablePartners=new ArrayList<>();
+    public ArrayList<House> availableHouses=new ArrayList<>();
     /*
      * Constructor
      * @param Player player
@@ -47,6 +49,26 @@ public class RunGame{
         availablePartners.add(sam);
         availablePartners.add(elliot);
         availablePartners.add(emily);
+        House h1 = new House("MapleVilla", 250000, 1);
+        House h2 = new House("CedarCottage", 180000, 2);
+        House h3 = new House("BirchEstate", 300000, 3);
+        House h4 = new House("WillowHeights", 450000, 1);
+        House h5 = new House("OakHouse", 220000, 2);
+        House h6 = new House("PineRetreat", 270000, 3);
+        House h7 = new House("ElmResidence", 350000, 1);
+        House h8 = new House("AshLodge", 200000, 2);
+        House h9 = new House("SpruceManor", 600000, 3);
+        House h10 = new House("ChestnutHaven", 320000, 1);
+        availableHouses.add(h1);
+        availableHouses.add(h2);
+        availableHouses.add(h3);
+        availableHouses.add(h4);
+        availableHouses.add(h5);
+        availableHouses.add(h6);
+        availableHouses.add(h7);
+        availableHouses.add(h8);
+        availableHouses.add(h9);
+        availableHouses.add(h10);
     }
     /*
      * take in the commands user input to the class
@@ -63,7 +85,7 @@ public class RunGame{
                 return inputStr;         
             }
         }
-        return "other";
+        return "OTHER";
     }
     /**
      * Ask player to input commands for each year playing the game. 
@@ -74,6 +96,7 @@ public class RunGame{
     public void everyYear(Player p, Scanner input, Time time) {
         if(p.health.diseaseType!=null){
             p.health.impactHealth();
+            p.health.findDoctor(input, p);
         }
         event1(time.getTime(), p);
         event2(time.getTime(), p);
@@ -95,11 +118,6 @@ public class RunGame{
     
                 case "READ":
                     p.intelligence.readBook();
-                    counter++;
-                    break;
-    
-                case "SELL":
-                    p.money.sellHouse(input, time.counter);
                     counter++;
                     break;
     
@@ -141,6 +159,77 @@ public class RunGame{
                     break;
                 case "DROP":
                     p.intelligence.dropOut();
+                case "LOTTERY":
+                    p.money.buyLottery();
+                case "HOUSE":
+                    boolean end=false;
+                    do{
+                        System.out.println("Here are a list of available houses. Please enter the number corrsponding to the house you want to buy.");
+                        for(int i=0;i<this.availableHouses.size();i++){
+                            System.out.print((i+1)+": ");
+                            this.availableHouses.get(i).printManifest();
+                        }
+                        int ans2=input.nextInt();
+                        input.nextLine();
+                        if(ans2<=this.availableHouses.size()){
+                            if(p.money.amount>=this.availableHouses.get(ans2-1).price){
+                                House sold=this.availableHouses.get(ans2-1);
+                                sold.timeBought=time.getTime();
+                                p.money.house.add(sold);
+                                p.money.amount-=sold.price;
+                                this.availableHouses.remove(sold);
+                                System.out.println("You just bought a house!");
+                                end=true;
+                            } else{
+                                System.out.println("Sorry, you can't afford this house.");
+                                end=true;
+                            }
+                        } else{
+                            System.out.println("Your current selection is not available. Try again? (y/n)");
+                            GetYN yn=new GetYN();
+                            String answer=input.nextLine();
+                            boolean yesorNo=yn.yesOrNo(answer);
+                            if(yesorNo==true){
+                                end=false;
+                            } else{
+                                end=true;
+                            }
+                        } 
+                    } while(!end);
+                    counter++;
+                    break;
+            
+                case "SELL":
+                    end=false;
+                    do{
+                    if(p.money.house.isEmpty()){
+                        System.out.println("You do not currently own a house.");
+                        end=true;
+                    } else{
+                        System.out.println("Which house do you want to sell? Please enter the corresponding number.");
+                        for (int i=0;i<p.money.house.size();i++){
+                            p.money.house.get(i-1).printManifest();
+                        }
+                        int ans3=input.nextInt();
+                        input.nextLine();
+                        if(ans3<=p.money.house.size()){
+                            House selected=p.money.house.get(ans3-1);
+                            p.money.sellHouse(selected,time.getTime());
+                            p.money.house.remove(selected);
+                            end=true;
+                        } else{
+                            System.out.println("Your current selection is not available. Try again? (y/n)");
+                            GetYN yn=new GetYN();
+                            String answer=input.nextLine();
+                            boolean yesorNo=yn.yesOrNo(answer);
+                            if(yesorNo==true){
+                                end=false;
+                            } else{
+                                end=true;
+                            }
+                        }}} while(end==false);
+                        counter++;
+                        break;
                 case "OTHER":
                     System.out.println("Invalid action. Please try again.");
                     break;

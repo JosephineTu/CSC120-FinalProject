@@ -29,7 +29,11 @@ public class Health {
      * add 5 points to int healthIndex
      */
     public void doExercise(){
-        this.healthIndex+=5;
+        if(this.getHealthIndex()<95){
+            this.healthIndex+=5;
+        } else{
+            this.healthIndex=100;
+        }
     }
     /*
      * generate a random disease from the DISEASE class, and change boolean isSick to true. 

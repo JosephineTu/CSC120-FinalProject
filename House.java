@@ -6,8 +6,8 @@ public class House {
     //Attributes
     String name;
     public double price;
-    int timeBought=0;
-    int growthType;
+    public int timeBought;
+    public int growthType;
     /*
      * Constructor
      * @param String name
@@ -18,6 +18,7 @@ public class House {
         this.name=name;
         this.price=price;
         this.growthType=growthType;
+        this.timeBought=0;
     }
     /*
      * calculate the current price of the house based on the growthType and difference between currentTime and timeBought
@@ -44,6 +45,9 @@ public class House {
     public String toString(House b){
         String house=b.name+","+b.price+"USD.";
         return house;
+    }
+    public void printManifest(){
+        System.out.println(this.toString(this));
     }
 
 }
