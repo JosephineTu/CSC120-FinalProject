@@ -17,7 +17,7 @@ public class RunGame{
     public final HashMap<String,String> commands=
     new HashMap<>(Map.of("exercise","EXERCISE","read","READ",
     "sell","SELL","next","NEXT","ask","ASK","drop","DROP",
-    "lottery","LOTTERY","house","HOUSE","other","OTHER"));
+    "lottery","LOTTERY","house","HOUSE","other","OTHER","help","HELP"));
     public ArrayList<Job> jobs=new ArrayList<>();
     public ArrayList<Partner> availablePartners=new ArrayList<>();
     public ArrayList<House> availableHouses=new ArrayList<>();
@@ -103,6 +103,8 @@ public class RunGame{
         event3(input,p,time.getTime());
         event4(p,input,time.getTime());
         event5(p,input,time.getTime());
+        event6(p,input,gameTime.getTime());
+        event7(p);
         p.money.amount+=p.money.annualIncome;
         int counter = 0;
         boolean termLoop = false;
@@ -208,7 +210,7 @@ public class RunGame{
                     } else{
                         System.out.println("Which house do you want to sell? Please enter the corresponding number.");
                         for (int i=0;i<p.money.house.size();i++){
-                            p.money.house.get(i-1).printManifest();
+                            p.money.house.get(i).printManifest();
                         }
                         int ans3=input.nextInt();
                         input.nextLine();
@@ -233,6 +235,17 @@ public class RunGame{
                 case "OTHER":
                     System.out.println("Invalid action. Please try again.");
                     break;
+                case "HELP":
+                    System.out.println("Here are a list of valid commands:");
+                    System.out.println("(do) exercise\n" + //
+                                                "read (books)\n" + //
+                                                "ask (for money)\n" + //
+                                                "sell (house)\n" + //
+                                                "drop (out)\n" + //
+                                                "next (year)\n" + //
+                                                "(buy) house\n" + //
+                                                "(buy) lottery\n" + //
+                                                "yes/no");
             }
         }
     
@@ -244,7 +257,7 @@ public class RunGame{
     public void mainLoop(Scanner input){
         do{
             everyYear(this.player,input,this.gameTime);
-            if(this.player.health.getHealthIndex()<=0||this.gameTime.getTime()>50){
+            if(this.player.health.getHealthIndex()<=0||this.gameTime.getTime()>70){
                 this.gamecontinues=false;
                 System.out.println("You died. Rest in peace!");
             }
@@ -310,17 +323,84 @@ public class RunGame{
             if(yn==true){
                 selectedPartner.isInrelationship=true;
                 availablePartners.remove(selectedPartner);
+                p.partners.add(selectedPartner);
                 System.out.println("Now you are dating "+selectedPartner.name+"!");
             }
         }
     }
+    public void event6(Player p, Scanner input, int time){
+        if(time>20 && !p.partners.isEmpty() && !p.partners.get(0).isMarried){
+            System.out.println(p.partners.get(0).name+" proposed to you. Do you want to get married? (y/n)");
+            GetYN yn=new GetYN();
+            String ans=input.nextLine();
+            boolean answer=yn.yesOrNo(ans);
+            if(answer==true){
+                p.partners.get(0).getMarried(p);
+                p.isMarried=true;
+            } else{
+                Partner selected=p.partners.get(0);
+                selected.breakUp();
+                p.partners.remove(selected);
+            }
+        }
+        
+    }
+    public void event7(Player p){
+        if(p.isMarried==true && p.partners.size()>1){
+            Random rand=new Random();
+            int odd=rand.nextInt(3);
+            if(odd==2){
+                System.out.println(p.partners.get(0)+" found out about your other dates and want a divorce.");
+                p.partners.get(0).divorce(p);
+                p.partners.get(0).isInrelationship=false;
+                p.partners.remove(p.partners.get(0));
+            }
+        }
+    }
+    public FamilyMember[] generateParents() {
+        Random rand = new Random();
+        String[] parentNames={"Alex", "Taylor", "Jordan", "Morgan", "Casey", "Riley", "Jamie", "Chris"};
+        // Generate Mom
+        int momAge = rand.nextInt(15) + 20; 
+        String momName = parentNames[rand.nextInt(parentNames.length)];
+        int momRelationshipValue = rand.nextInt(51) + 50; 
+        boolean momIsAlive = true;
+        boolean momCanGiveMoney = rand.nextBoolean(); 
+
+        FamilyMember mom = new FamilyMember(
+            momAge,
+            momName,
+            "Mom",
+            momRelationshipValue,
+            momIsAlive,
+            momCanGiveMoney
+        );
+        int dadAge = rand.nextInt(15) + 20;
+        String dadName = parentNames[rand.nextInt(parentNames.length)];
+        int dadRelationshipValue = rand.nextInt(51) + 50;
+        boolean dadIsAlive = true;
+        boolean dadCanGiveMoney = rand.nextBoolean();
+
+        FamilyMember dad = new FamilyMember(
+            dadAge,
+            dadName,
+            "Dad",
+            dadRelationshipValue,
+            dadIsAlive,
+            dadCanGiveMoney
+        );
+
+        return new FamilyMember[]{mom, dad};
+    }
+
     public static void main (String[] args){
         Player me=new Player(0,"Josephine",100,"me",true,new Health(95),new Intelligence(85),new Money(0),new ArrayList<>());
         Time gt=new Time();
         RunGame game=new RunGame(me);
         Scanner input=new Scanner(System.in);
-        FamilyMember arkintu=new FamilyMember(31, "ArkinTu", "father", 100, true, true);
-        me.people.add(arkintu);
+        FamilyMember[] parents=game.generateParents();
+        me.people.add(parents[0]);
+        me.people.add(parents[1]);
         game.mainLoop(input);
         input.close();
     }

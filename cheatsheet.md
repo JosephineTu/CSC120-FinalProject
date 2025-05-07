@@ -5,6 +5,8 @@ ask (for money)
 sell (house)
 drop (out)
 next (year)
+(buy) house
+(buy) lottery
 yes/no
 Note:  It's a good idea to also make this list available inside the game, in response to a `HELP` command.
 

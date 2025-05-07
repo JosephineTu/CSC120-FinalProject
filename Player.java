@@ -9,6 +9,7 @@ public class Player extends Person{
     public Money money; // the amount of money the player has
     public ArrayList<Person> people; // the list of friend and family member of the player
     public ArrayList<Partner> partners;
+    public boolean isMarried;
     /**
      * constructor
      * @param age
@@ -29,6 +30,7 @@ public class Player extends Person{
         this.relationshipValue=100;
         this.people=people;
         this.partners=new ArrayList<>();
+        this.isMarried=false;
     }
 
     /**

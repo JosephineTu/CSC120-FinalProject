@@ -20,6 +20,7 @@ public class Partner extends Person {
     public void breakUp(){
         if(this.isInrelationship==true){
             this.isInrelationship=false;
+            System.out.println(this.name+" broke up with you...");
         }
     }
     public boolean divorce(Player p){

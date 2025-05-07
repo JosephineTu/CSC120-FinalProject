@@ -9,7 +9,7 @@ public class Person {
 
     //Constructor
     public Person(int age, String relationshipType,String name, int relationshipValue, boolean  isAlive){
-        this.age = 0;
+        this.age=age;
         this.name = name;
         this.relationshipType=relationshipType;
         this.relationshipValue = relationshipValue;
@@ -33,7 +33,8 @@ public class Person {
 
     public void printManifest(int time){
         if(this.getIsAlive()){
-            System.out.println("Your "+this.relationshipType+this.name+" is "+(this.getage()+time)+" years old, has a "+this.relationshipValue+" relationship with you");
+            int age=this.getage();
+            System.out.println("Your "+this.relationshipType+" "+this.name+" is "+(age+time)+" years old, has a "+this.relationshipValue+" relationship with you");
         }
     }
 
