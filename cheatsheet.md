@@ -7,7 +7,8 @@ drop (out)
 next (year)
 (buy) house
 (buy) lottery
-yes/no
+yes/no (only when asked)
+help (reveal all available commands)
 Note:  It's a good idea to also make this list available inside the game, in response to a `HELP` command.
 
 # SPOILER ALERT
