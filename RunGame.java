@@ -1,15 +1,17 @@
 // import java packages
-import java.util.Scanner;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
-import java.util.ArrayList;
+import java.util.Scanner;
 /*
  * RunGame class that serve as the main panel for player to play the game.
  * Keep all the main methods and attributes that runs the game.
  * @version: April 29, 2025
  */
 public class RunGame{
+
+
     //Attributes
     public Time gameTime;
     public Player player;
@@ -21,6 +23,9 @@ public class RunGame{
     public ArrayList<Job> jobs=new ArrayList<>();
     public ArrayList<Partner> availablePartners=new ArrayList<>();
     public ArrayList<House> availableHouses=new ArrayList<>();
+
+
+    
     /*
      * Constructor
      * @param Player player
@@ -263,6 +268,13 @@ public class RunGame{
             }
         } while(this.gamecontinues==true);
     }
+
+    /**
+     * Handles the school entry event at age 6 and dropout event at age 28.
+     * 
+     * @param time Current game time (player's age)
+     * @param p Player object
+     */
     public void event1(int time,Player p){
         if(time==6){
             p.intelligence.goToSchool();
@@ -271,12 +283,29 @@ public class RunGame{
             p.intelligence.dropOut();
         }
     }
+
+
+    /**
+     * Handles school exam events at specific ages if player is in school.
+     * 
+     * @param time Current game time (player's age)
+     * @param p Player object
+     */
     public void event2(int time,Player p){
         if((time==12||time==15||time==18||time==22||time==24)&&p.intelligence.getinSchool()==true){
             p.intelligence.takeExam();
         }
     }
-    public void event3(Scanner input,Player p,int time){
+
+
+    /**
+     * Handles job finding events for adult players who are unemployed and not in school.
+     * 
+     * @param input Scanner object to read user input
+     * @param p Player object
+     * @param time Current game time (player's age)
+     */
+        public void event3(Scanner input,Player p,int time){
         if(time>18 && p.money.isEmployed==false && p.intelligence.getinSchool()==false){
             System.out.println("Try to find a job? (y/n)");
             GetYN yn=new GetYN();
@@ -287,6 +316,14 @@ public class RunGame{
             }
         }
     }
+
+
+    /**
+     * Matches player with an available job based on their education level.
+     * Randomly selects from jobs that match player's qualifications.
+     * 
+     * @param p Player object to assign the job to
+     */
     public void matchJob(Player p){
         ArrayList<Job> availableJobs=new ArrayList<>();
         for(Job b:this.jobs){
@@ -301,6 +338,14 @@ public class RunGame{
         System.out.println("You are now employed as a "+p.money.currentJob.name+"!");
         p.money.isEmployed=true;
     }
+
+    /**
+     * Random health event that may cause player to fall sick.
+     * 
+     * @param p Player object
+     * @param input Scanner object to read user input
+     * @param time Current game time (player's age)
+     */
     public void event4(Player p,Scanner input,int time){
         Random rand=new Random();
         int odd=rand.nextInt(7);
@@ -309,6 +354,14 @@ public class RunGame{
             p.health.findDoctor(input,p);
         }
     }
+    /**
+     * Random relationship event that may introduce a potential partner.
+     * Occurs during young adult years with a chance to start dating.
+     * 
+     * @param p Player object
+     * @param input Scanner object to read user input
+     * @param time Current game time (player's age)
+     */
     public void event5(Player p, Scanner input, int time){
         Random odd=new Random();
         int puppylove=odd.nextInt(3);
@@ -328,6 +381,15 @@ public class RunGame{
             }
         }
     }
+
+    /**
+     * Marriage proposal event for players in a relationship.
+     * Player can accept or decline, with consequences for either choice.
+     * 
+     * @param p Player object
+     * @param input Scanner object to read user input
+     * @param time Current game time (player's age)
+     */
     public void event6(Player p, Scanner input, int time){
         if(time>20 && !p.partners.isEmpty() && !p.partners.get(0).isMarried){
             System.out.println(p.partners.get(0).name+" proposed to you. Do you want to get married? (y/n)");
@@ -345,6 +407,12 @@ public class RunGame{
         }
         
     }
+    /**
+     * Cheating consequence event that may occur if player is married but has multiple partners.
+     * May result in divorce if discovered.
+     * 
+     * @param p Player object
+     */
     public void event7(Player p){
         if(p.isMarried==true && p.partners.size()>1){
             Random rand=new Random();
@@ -357,6 +425,13 @@ public class RunGame{
             }
         }
     }
+
+    /**
+     * Generates parent characters for the player with randomized attributes.
+     * Creates two FamilyMember objects representing the player's parents.
+     * 
+     * @return Array of two FamilyMember objects representing the player's parents
+     */
     public FamilyMember[] generateParents() {
         Random rand = new Random();
         String[] parentNames={"Alex", "Taylor", "Jordan", "Morgan", "Casey", "Riley", "Jamie", "Chris"};

@@ -10,6 +10,8 @@ public class Player extends Person{
     public ArrayList<Person> people; // the list of friend and family member of the player
     public ArrayList<Partner> partners;
     public boolean isMarried;
+
+
     /**
      * constructor
      * @param age
@@ -43,11 +45,23 @@ public class Player extends Person{
             this.intelligence.value=100;
         }
     }
+
+    /**
+     * display manifest of people the player can interact with
+     * @param time
+     */
     public void printPeople(int time){
         for(int i=1;i<this.people.size()+1;i++){
             this.people.get(i-1).printManifest(time);
         }
     }
+
+    /**
+    * Displays all current relationships and prompts user to select one to end.
+    * 
+    * @param input Scanner for reading user input
+    * @param time Current game time
+    */
     public void endRelationship(Scanner input, int time){
         System.out.println("Here are the relationships you currently have: ");
         this.printPeople(time);
